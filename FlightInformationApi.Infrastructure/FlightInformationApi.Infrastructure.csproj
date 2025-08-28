@@ -8,8 +8,12 @@
 
   <ItemGroup>
     <Folder Include="Data\" />
-    <Folder Include="Services\" />
     <Folder Include="Repositories\" />
+    <Folder Include="Services\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FlightInformationApi.Core\FlightInformationApi.Core.csproj" />
   </ItemGroup>
 
 </Project>
