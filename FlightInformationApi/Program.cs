@@ -1,5 +1,11 @@
+using FlightInformationApi.Core.Interfaces;
+using FlightInformationApi.Core.Validators;
 using FlightInformationApi.Infrastructure.Data;
+using FlightInformationApi.Infrastructure.Repositories;
+using FlightInformationApi.Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +19,15 @@ builder.Services.AddSwaggerGen();
 // Entity Framework
 builder.Services.AddDbContext<FlightDbContext>(options =>
     options.UseInMemoryDatabase("FlightDatabase"));
+
+// Repository Pattern
+builder.Services.AddScoped<IFlightRepository, FlightRepository>();
+builder.Services.AddScoped<IFlightService, FlightService>();
+
+// Validation
+builder.Services.AddFluentValidationAutoValidation();
+builder.Services.AddFluentValidationClientsideAdapters();
+builder.Services.AddValidatorsFromAssemblyContaining<CreateFlightValidator>();
 
 var app = builder.Build();
 

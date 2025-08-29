@@ -21,6 +21,10 @@ public class FlightRepository : IFlightRepository
             .OrderBy(f => f.DepartureTime)
             .ToListAsync();
     }
+    public async Task<Flight?> GetByIdAsync(int id)
+    {
+        return await _context.Flights.FindAsync(id);
+    }
 
     public async Task<Flight> CreateAsync(Flight flight)
     {

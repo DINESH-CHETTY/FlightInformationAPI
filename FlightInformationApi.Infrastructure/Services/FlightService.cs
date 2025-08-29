@@ -26,6 +26,23 @@ public class FlightService : IFlightService
         return flights.Select(f => f.ToDto());
     }
 
+    public async Task<FlightDto?> GetFlightByIdAsync(int id)
+    {
+        _logger.LogInformation("Retrieving flight with ID: {FlightId}", id);
+
+        var flight = await _flightRepository.GetByIdAsync(id);
+
+        if (flight == null)
+        {
+            _logger.LogWarning("Flight with ID {FlightId} not found", id);
+        }
+        else
+        {
+            _logger.LogDebug("Retrieved flight {FlightNumber} for ID {FlightId}", flight.FlightNumber, id);
+        }
+
+        return flight?.ToDto();
+    }
     public async Task<FlightDto> CreateFlightAsync(CreateFlightDto createFlightDto)
     {
         _logger.LogInformation("Creating new flight {FlightNumber} from {DepartureAirport} to {ArrivalAirport}",
