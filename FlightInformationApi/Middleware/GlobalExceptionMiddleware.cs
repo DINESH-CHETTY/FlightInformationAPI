@@ -1,7 +1,7 @@
 ﻿using System.Net;
 using System.Text.Json;
 
-namespace FlightInformationApi.Api.Middleware;
+namespace FlightInformationApi.Middleware;
 
 public class GlobalExceptionMiddleware
 {

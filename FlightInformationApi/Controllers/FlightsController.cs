@@ -3,7 +3,7 @@ using FlightInformationApi.Core.DTOs;
 using FlightInformationApi.Core.Interfaces;
 using FluentValidation;
 
-namespace FlightInformationApi.Api.Controllers;
+namespace FlightInformationApi.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
