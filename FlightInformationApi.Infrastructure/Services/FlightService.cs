@@ -43,6 +43,7 @@ public class FlightService : IFlightService
 
         return flight?.ToDto();
     }
+
     public async Task<FlightDto> CreateFlightAsync(CreateFlightDto createFlightDto)
     {
         _logger.LogInformation("Creating new flight {FlightNumber} from {DepartureAirport} to {ArrivalAirport}",
@@ -55,5 +56,57 @@ public class FlightService : IFlightService
             createdFlight.Id, createdFlight.FlightNumber);
 
         return createdFlight.ToDto();
+    }
+
+    public async Task<FlightDto?> UpdateFlightAsync(int id, UpdateFlightDto updateFlightDto)
+    {
+        _logger.LogInformation("Updating flight with ID {FlightId}. New data: {FlightNumber}", id, updateFlightDto.FlightNumber);
+
+        var flight = updateFlightDto.ToEntity();
+        var updatedFlight = await _flightRepository.UpdateAsync(id, flight);
+
+        if (updatedFlight != null)
+        {
+            _logger.LogInformation("Flight with ID {FlightId} updated successfully: {FlightNumber} - Status: {Status}",
+                id, updatedFlight.FlightNumber, updatedFlight.Status);
+        }
+        else
+        {
+            _logger.LogWarning("Flight with ID {FlightId} not found for update", id);
+        }
+
+        return updatedFlight?.ToDto();
+    }
+
+    public async Task<bool> DeleteFlightAsync(int id)
+    {
+        _logger.LogInformation("Attempting to delete flight with ID {FlightId}", id);
+
+        var result = await _flightRepository.DeleteAsync(id);
+
+        if (result)
+        {
+            _logger.LogInformation("Flight with ID {FlightId} deleted successfully", id);
+        }
+        else
+        {
+            _logger.LogWarning("Flight with ID {FlightId} not found for deletion", id);
+        }
+
+        return result;
+    }
+
+    public async Task<IEnumerable<FlightDto>> SearchFlightsAsync(FlightSearchDto searchDto)
+    {
+        _logger.LogInformation("Searching flights with criteria - Airline: {Airline}, DepartureAirport: {DepartureAirport}, ArrivalAirport: {ArrivalAirport}, Status: {Status}",
+            searchDto.Airline ?? "Any",
+            searchDto.DepartureAirport ?? "Any",
+            searchDto.ArrivalAirport ?? "Any",
+            searchDto.Status ?? "Any");
+
+        var flights = await _flightRepository.SearchAsync(searchDto);
+
+        _logger.LogInformation("Search completed. Found {FlightCount} matching flights", flights.Count());
+        return flights.Select(f => f.ToDto());
     }
 }
