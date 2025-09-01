@@ -28,6 +28,8 @@ builder.Services.AddScoped<IFlightService, FlightService>();
 builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddFluentValidationClientsideAdapters();
 builder.Services.AddValidatorsFromAssemblyContaining<CreateFlightValidator>();
+builder.Services.AddValidatorsFromAssemblyContaining<FlightSearchValidator>();
+builder.Services.AddValidatorsFromAssemblyContaining<UpdateFlightValidator>();
 
 var app = builder.Build();
 
