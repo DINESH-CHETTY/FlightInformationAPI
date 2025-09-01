@@ -60,7 +60,8 @@ public class FlightService : IFlightService
 
     public async Task<FlightDto?> UpdateFlightAsync(int id, UpdateFlightDto updateFlightDto)
     {
-        _logger.LogInformation("Updating flight with ID {FlightId}. New data: {FlightNumber}", id, updateFlightDto.FlightNumber);
+        _logger.LogInformation("Updating flight with ID {FlightId}. New data: {FlightNumber}",
+            id, updateFlightDto.FlightNumber);
 
         var flight = updateFlightDto.ToEntity();
         var updatedFlight = await _flightRepository.UpdateAsync(id, flight);

@@ -50,7 +50,7 @@ public class FlightsController : ControllerBase
     public async Task<ActionResult<FlightDto>> GetFlightById(int id)
     {
         var flight = await _flightService.GetFlightByIdAsync(id);
-        
+
         if (flight == null)
         {
             return NotFound($"Flight with ID {id} not found.");
@@ -76,7 +76,7 @@ public class FlightsController : ControllerBase
         }
 
         var createdFlight = await _flightService.CreateFlightAsync(createFlightDto);
-        
+
         return CreatedAtAction(
             nameof(GetFlightById),
             new { id = createdFlight.Id },
@@ -102,7 +102,7 @@ public class FlightsController : ControllerBase
         }
 
         var updatedFlight = await _flightService.UpdateFlightAsync(id, updateFlightDto);
-        
+
         if (updatedFlight == null)
         {
             return NotFound($"Flight with ID {id} not found.");
@@ -122,7 +122,7 @@ public class FlightsController : ControllerBase
     public async Task<IActionResult> DeleteFlight(int id)
     {
         var result = await _flightService.DeleteFlightAsync(id);
-        
+
         if (!result)
         {
             return NotFound($"Flight with ID {id} not found.");

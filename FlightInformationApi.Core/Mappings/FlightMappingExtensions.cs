@@ -33,17 +33,17 @@ public static class FlightMappingExtensions
         };
     }
 
-    public static Flight ToEntity(this UpdateFlightDto createDto)
+    public static Flight ToEntity(this UpdateFlightDto updateDto)
     {
         return new Flight
         {
-            FlightNumber = createDto.FlightNumber,
-            Airline = createDto.Airline,
-            DepartureAirport = createDto.DepartureAirport,
-            ArrivalAirport = createDto.ArrivalAirport,
-            DepartureTime = createDto.DepartureTime,
-            ArrivalTime = createDto.ArrivalTime,
-            Status = Enum.Parse<FlightStatus>(createDto.Status, true)
+            FlightNumber = updateDto.FlightNumber,
+            Airline = updateDto.Airline,
+            DepartureAirport = updateDto.DepartureAirport,
+            ArrivalAirport = updateDto.ArrivalAirport,
+            DepartureTime = updateDto.DepartureTime,
+            ArrivalTime = updateDto.ArrivalTime,
+            Status = Enum.Parse<FlightStatus>(updateDto.Status, true)
         };
     }
 }
