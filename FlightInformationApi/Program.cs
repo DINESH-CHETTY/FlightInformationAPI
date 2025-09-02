@@ -1,4 +1,4 @@
-using FlightInformationApi.Core.Interfaces;
+﻿using FlightInformationApi.Core.Interfaces;
 using FlightInformationApi.Infrastructure.Data;
 using FlightInformationApi.Infrastructure.Repositories;
 using FlightInformationApi.Infrastructure.Services;
@@ -19,7 +19,6 @@ try
     var builder = WebApplication.CreateBuilder(args);
 
     // NLog: Setup NLog for Dependency injection
-    builder.Logging.ClearProviders();
     builder.Host.UseNLog();
 
     // Add services to the container.
