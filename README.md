@@ -41,8 +41,25 @@ This project follows Clean Architecture principles with the following layers:
 - Visual Studio 2022 or VS Code
 
 ### Installation
-
-1. Clone the repository:
+ Clone the repository:
 ```bash
 git clone https://github.com/DINESH-CHETTY/FlightInformationAPI.git
-cd FlightInformationApi
+
+### Running the Application
+### Commands
+```bash
+# Restore dependencies
+dotnet restore
+
+# Build the solution
+dotnet build
+
+# Run the API
+dotnet run --project FlightInformationApi
+
+# Run tests
+dotnet test
+
+### Access Points
+API: https://localhost:7137
+Swagger UI: https://localhost:7137/swagger
